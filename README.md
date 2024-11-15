@@ -99,11 +99,25 @@ This E-Gift Commerce Portal built using Django and Tailwind CSS.
 
 ## Running the Application
 
-Once the setup is complete, you can start the Django development server:
+### Load giftcard fixtures into database
 
-```bash
-python manage.py runserver
+```shell
+# Load fixtures from giftcards app, fixtures directory, load_data.json:
+python manage.py loaddata load_data
 ```
 
+### Collect all static files into single location defined by STATIC_ROOT (optional)
+
+```shell
+# Not necessary for Django test environment, but recommended for production:
+python manage.py collectstatic
+```
+
+### Start the Django development server
+
+```shell
+# Once setup complete, this can be used for developer testing only:
+python manage.py runserver
+```
 
 The application will be accessible at http://127.0.0.1:8000/.

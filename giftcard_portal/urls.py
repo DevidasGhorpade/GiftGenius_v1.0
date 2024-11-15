@@ -36,8 +36,9 @@ urlpatterns = [
     # User management:
     path('accounts/', include('django.contrib.auth.urls')),
 
-    # Local apps:
+    # Local apps - believe need to order from most to least specific:
     path('accounts/', include('accounts.urls')),
+    path('giftcards/', include('giftcards.urls')),
+    path('shop/', include('shop.urls')),
     path('', include('main.urls')),
-    path('giftcards/', include('giftcards.urls'))
 ]

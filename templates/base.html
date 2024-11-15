@@ -23,14 +23,24 @@
             </div>
             <nav>
                 {% if user.is_authenticated %}
-                    <p>
+                    <a href="{% url 'giftcard_list' %}" class="nav-link">Gift Cards</a>
+                    <a href="{% url 'shop' %}" class="nav-link">Shop</a>
+                {% endif %}
+                {% if user.is_superuser %}
+                    <!-- URL form preferered but not sure what it is... -->
+                    <a href="/admin" class="nav-link">Admin</a>
+                {% endif %}
+            </nav>
+            <nav>
+                {% if user.is_authenticated %}
+                    <div class="columns-2">
                         <!-- Better would be user.first_name if present otherwise user.username: -->
                         {{ user.username }}
-                    </p>
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Logout</button>
-                    </form>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </div>
                 {% else %}
                     <a href="{% url 'login' %}" class="nav-link">Login</a>
                     <a href="{% url 'register' %}" class="nav-link">Register</a>
