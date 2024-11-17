@@ -1,6 +1,8 @@
-# E-Gift Commerce Portal
+# Gift Genius v1.0
 
-This is the E-Gift Commerce Portal built using Django and Tailwind CSS.
+Gift Genius allows users to quickly make the best-informed decision when purchasing gift cards. Options include a wide selection of gift cards from different retailers and brands, gift card customization, and digital or physical card delivery options.
+
+This E-Gift Commerce Portal built using Django and Tailwind CSS.
 
 ## Table of Contents
 
@@ -53,27 +55,28 @@ This is the E-Gift Commerce Portal built using Django and Tailwind CSS.
 
 6. **Run the Migrations**:
     ```bash
+    python manage.py makemigrations accounts
     python manage.py migrate
     ```
 
 ### For Windows
 
 1. **Clone the Repository**:
-    Open Command Prompt or Git Bash:
-    ```bash
+    Open PowerShell:
+    ```powershell
     git clone <repository-url>
     cd e-giftcard-portal
     ```
 
 2. **Create a Virtual Environment**:
     (Optional, but recommended)
-    ```bash
+    ```powershell
     python -m venv env
     env\Scripts\activate
     ```
 
 3. **Install Dependencies**:
-    ```bash
+    ```powershell
     pip install -r requirements.txt
     ```
 
@@ -82,12 +85,13 @@ This is the E-Gift Commerce Portal built using Django and Tailwind CSS.
 
 5. **Install Tailwind CSS**:
     Install Tailwind CSS as a PostCSS plugin by running:
-    ```bash
+    ```powershell
     npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
     ```
 
 6. **Run the Migrations**:
-    ```bash
+    ```powershell
+    python manage.py makemigrations accounts
     python manage.py migrate
     ```
 
@@ -95,10 +99,25 @@ This is the E-Gift Commerce Portal built using Django and Tailwind CSS.
 
 ## Running the Application
 
-Once the setup is complete, you can start the Django development server:
+### Load giftcard fixtures into database
 
-```bash
+```shell
+# Load fixtures from giftcards app, fixtures directory, load_data.json:
+python manage.py loaddata load_data
+```
+
+### Collect all static files into single location defined by STATIC_ROOT (optional)
+
+```shell
+# Not necessary for Django test environment, but recommended for production:
+python manage.py collectstatic
+```
+
+### Start the Django development server
+
+```shell
+# Once setup complete, this can be used for developer testing only:
 python manage.py runserver
-
+```
 
 The application will be accessible at http://127.0.0.1:8000/.

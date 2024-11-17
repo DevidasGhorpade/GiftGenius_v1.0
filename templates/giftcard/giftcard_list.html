@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %} Gift Cards - Gift Genius {% endblock title %}
+
+{% block content %}
+<section class="bg-white">
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 mb-8">Available Gift Cards</h2>
+
+    <form method="get" action="{% url 'giftcard_list' %}" class="mb-8 flex flex-wrap items-center gap-4 bg-gray-100 p-4 rounded-lg shadow-sm">
+        <input 
+            type="text" 
+            name="search" 
+            placeholder="Search by name" 
+            value="{{ request.GET.search|default:'' }}"
+            class="border p-2 rounded-lg w-full sm:w-auto flex-1 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+
+        <input 
+            type="number" 
+            name="min_amount" 
+            placeholder="Min Amount" 
+            value="{{ request.GET.min_amount|default:'' }}"
+            class="border p-2 rounded-lg w-full sm:w-auto flex-1 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+
+        <input 
+            type="number" 
+            name="max_amount" 
+            placeholder="Max Amount" 
+            value="{{ request.GET.max_amount|default:'' }}"
+            class="border p-2 rounded-lg w-full sm:w-auto flex-1 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+
+        <select 
+            name="sort" 
+            class="border p-2 rounded-lg w-full sm:w-auto flex-1 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <option value="" {% if request.GET.sort == "" %}selected{% endif %}>Sort By</option>
+            <option value="price" {% if request.GET.sort == "price" %}selected{% endif %}>Price</option>
+            <option value="availability" {% if request.GET.sort == "availability" %}selected{% endif %}>Availability</option>
+        </select>
+
+        <button 
+            type="submit" 
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition focus:outline-none">
+            Search
+        </button>
+
+        <a href="{% url 'giftcard_list' %}" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition focus:outline-none">
+            Reset
+        </a>
+    </form>
+
+    <div class="grid grid-cols-1 gap-y-8 gap-x-8 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+      {% for card in giftcards %}
+      <div class="group block bg-white p-6 border rounded-lg shadow hover:shadow-lg transition duration-300 max-w-xs mx-auto h-80 flex flex-col justify-between">
+        <div class="aspect-w-16 aspect-h-9 w-full overflow-hidden rounded-lg bg-gray-200">
+          <img src="{{ card.image_url }}" alt="{{ card.card_name }}" class="h-40 w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <div class="mt-4 text-center flex-grow">
+          <h3 class="text-lg font-semibold text-gray-800 truncate">{{ card.card_name }}</h3>
+          <p class="text-sm text-gray-600 mt-2 truncate">{{ card.card_description }}</p>
+        </div>
+        <div class="text-center">
+          <p class="mt-3 text-lg font-bold text-gray-900">${{ card.amount }}</p>
+          <p class="text-sm text-gray-400">Expires on {{ card.expiration_date|date:"M d, Y" }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock content %}

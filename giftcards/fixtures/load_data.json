@@ -1,0 +1,53 @@
+[
+  {
+      "model": "giftcards.giftcard",
+      "pk": 1,
+      "fields": {
+          "card_name": "Amazon Gift Card",
+          "card_description": "A versatile gift card for Amazon purchases.",
+          "card_category": "Shopping",
+          "card_type": "Virtual",
+          "amount": "50.00",
+          "balance": "50.00",
+          "card_status": "Active",
+          "expiration_date": "2024-12-31",
+          "card_number": "AMZ12345",
+          "card_quantity": 100,
+          "image_url": "https://m.media-amazon.com/images/I/71KO5DJ0qNL.jpg"
+      }
+  },
+  {
+      "model": "giftcards.giftcard",
+      "pk": 2,
+      "fields": {
+          "card_name": "Spotify Gift Card",
+          "card_description": "Perfect for music lovers, redeemable on Spotify.",
+          "card_category": "Entertainment",
+          "card_type": "Virtual",
+          "amount": "30.00",
+          "balance": "30.00",
+          "card_status": "Active",
+          "expiration_date": "2025-06-30",
+          "card_number": "SPOT12345",
+          "card_quantity": 100,
+          "image_url": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/2800/2800086_sd.jpg;maxHeight=640;maxWidth=550;format=webp"
+      }
+  },
+  {
+      "model": "giftcards.giftcard",
+      "pk": 3,
+      "fields": {
+          "card_name": "Google Play Gift Card",
+          "card_description": "For apps, games, movies, and more on Google Play.",
+          "card_category": "Apps & Games",
+          "card_type": "Physical",
+          "amount": "20.00",
+          "balance": "20.00",
+          "card_status": "Active",
+          "expiration_date": "2024-10-31",
+          "card_number": "GPLAY12345",
+          "card_quantity": 100,
+          "image_url": "https://livecards.net/pl/google-play-gift-card-5-eur-73054.png"
+      }
+  }
+]

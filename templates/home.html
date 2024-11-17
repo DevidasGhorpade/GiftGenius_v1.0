@@ -1,8 +1,8 @@
-{% extends 'main/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
-Home - E-Gift Commerce
-{% endblock %}
+Home - Gift Genius
+{% endblock title %}
 
 {% block content %}
 <!-- Main Hero Section -->
@@ -11,7 +11,7 @@ Home - E-Gift Commerce
     <div class="text-center lg:text-left lg:w-1/2 fade-in space-y-6">
         <h1 class="text-5xl font-extrabold leading-tight fade-in text-black">The Future of Digital Gifting</h1>
         <p class="mt-4 text-lg leading-relaxed fade-in text-gray-700">Fast, secure, and convenient. Explore our platform for the best digital gift card experience.</p>
-        <a href="{% url 'login-register' 'Register' %}" class="mt-6 inline-block bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 fade-in"
+        <a href="{% url 'register' %}" class="mt-6 inline-block bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 fade-in"
             style="animation-delay: 1s;">Get Started</a>
     </div>
 
@@ -28,7 +28,7 @@ Home - E-Gift Commerce
         <p class="mt-4 text-lg fade-in text-gray-700">
             With access to a wide range of retailers and brands, our platform lets you customize digital gift cards for any occasion. Whether it’s a birthday, holiday, or just a token of appreciation, we empower you to gift thoughtfully, effortlessly.
             With both digital and physical delivery options, sending joy has never been easier. Choose a card, personalize it, and let us handle the rest.
-            At E-Gift Commerce, we make the art of gifting seamless, fast, and personalized. No more wandering through endless aisles or guessing what someone might like.  
+            At E-Gift Commerce, we make the art of gifting seamless, fast, and personalized. No more wandering through endless aisles or guessing what someone might like.
         </p>
     </div>
 </section>
@@ -46,9 +46,9 @@ Home - E-Gift Commerce
             </p>
         </div>
         <div class="lg:w-1/2 text-center lg:text-right mt-10 lg:mt-0">
-            <a href="{% url 'login-register' 'Register' %}" class="inline-block bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 fade-in"
+            <a href="{% url 'register' %}" class="inline-block bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 fade-in"
                 style="animation-delay: 1s;">Sign Up Now</a>
         </div>
     </div>
-</section>
-{% endblock %}
+<registersection>
+{% endblock content %}

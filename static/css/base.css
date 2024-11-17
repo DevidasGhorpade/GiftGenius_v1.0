@@ -1,0 +1,97 @@
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply the fade-in animation */
+.fade-in {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Global padding and margin reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global page styles for better spacing */
+body {
+    font-family: 'Helvetica', sans-serif;
+    line-height: 1.6;
+    background-color: #fff;
+    color: #000;
+}
+
+header {
+    padding: 20px 0;
+    background-color: #000;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .nav-link,
+footer a {
+    color: #fff;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+header .nav-link:hover,
+footer a:hover {
+    color: #999;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Adding spacing between sections */
+section {
+    margin-bottom: 50px;
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #000;
+    color: #999;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+footer a {
+    color: #999;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+/* Adjust body padding to compensate for fixed header */
+main {
+    padding-top: 80px; /* Adjust this padding based on your header height */
+}
