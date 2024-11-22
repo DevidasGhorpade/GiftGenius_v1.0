@@ -17,8 +17,9 @@ class ShoppingCart(models.Model):
 
 
 class ShoppingCartItem(models.Model):
+    itemid = models.AutoField(primary_key=True)
     cartid = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-    giftcard = models.ForeignKey('giftcards.GiftCard', on_delete=models.CASCADE)
+    giftcardid = models.ForeignKey('giftcards.GiftCard', on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
@@ -70,10 +71,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    orderid = models.ForeignKey(
-        Order, on_delete=models.CASCADE
-    )
-    giftcard = models.ForeignKey('giftcards.GiftCard', on_delete=models.CASCADE)
+    itemid = models.AutoField(primary_key=True)
+    orderid = models.ForeignKey(Order, on_delete=models.CASCADE)
+    giftcardid = models.ForeignKey('giftcards.GiftCard', on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
