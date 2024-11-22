@@ -1,4 +1,6 @@
 from django.shortcuts import render
+
+from giftcards.models import GiftCardType
 from .services import GiftCardCatalog, SearchEngine
 from django.contrib.auth.decorators import login_required
 
@@ -15,9 +17,9 @@ def giftcard_list(request):
     if query:
         giftcards = search_engine.perform_search(query)
     elif min_amount and max_amount:
-        giftcards = catalog.filter_gift_cards_by_amount(float(min_amount), float(max_amount))
+        giftcards = catalog.filter_gift_card_types_by_amount(float(min_amount), float(max_amount))
     else:
-        giftcards = catalog.search_gift_card('')
+        giftcards = catalog.search_gift_card_type('')
 
     if sort_criteria:
         giftcards = search_engine.sort_results(sort_criteria)
