@@ -22,17 +22,17 @@
                 <a href="/" class="text-white">Gift Genius</a>
             </div>
             <nav>
-                {% if user.is_authenticated %}
+                {% if user and user.is_authenticated %}
                     <a href="{% url 'giftcard_list' %}" class="nav-link">Gift Cards</a>
                     <a href="{% url 'shop' %}" class="nav-link">Shop</a>
                 {% endif %}
-                {% if user.is_superuser %}
+                {% if user and user.is_superuser %}
                     <!-- URL form preferered but not sure what it is... -->
                     <a href="/admin" class="nav-link">Admin</a>
                 {% endif %}
             </nav>
             <nav>
-                {% if user.is_authenticated %}
+                {% if user and user.is_authenticated %}
                     <div class="columns-2">
                         <!-- Better would be user.first_name if present otherwise user.username: -->
                         {{ user.username }}

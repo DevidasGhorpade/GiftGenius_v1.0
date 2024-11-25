@@ -55,8 +55,11 @@ This E-Gift Commerce Portal built using Django and Tailwind CSS.
 
 6. **Run the Migrations**:
     ```bash
-    python manage.py makemigrations accounts
+    python manage.py makemigrations
     python manage.py migrate
+
+7. **Create your Admin account**:
+    python manage.py createsuperuser
     ```
 
 ### For Windows
@@ -91,8 +94,12 @@ This E-Gift Commerce Portal built using Django and Tailwind CSS.
 
 6. **Run the Migrations**:
     ```powershell
-    python manage.py makemigrations accounts
+    python manage.py makemigrations
     python manage.py migrate
+    ```
+
+7. **Create your Admin account**:
+    python manage.py createsuperuser
     ```
 
 ---

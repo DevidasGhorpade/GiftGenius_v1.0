@@ -7,7 +7,9 @@ class CustomUserCreationForm(UserCreationForm):
         model = get_user_model()
         fields = (
             'email',
-            'username'
+            'username',
+            'first_name',
+            'last_name'
         )
 
 
@@ -16,5 +18,7 @@ class CustomUserChangeForm(UserChangeForm):
         model = get_user_model()
         fields = (
             'email',
-            'username'
+            'username',
+            'first_name',
+            'last_name'
         )
