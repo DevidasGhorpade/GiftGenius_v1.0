@@ -36,4 +36,8 @@ class SearchEngine:
             return self.search_results.order_by("amount")
         elif criteria == "availability":
             return self.search_results.order_by("quantity")
+        elif criteria == "vendor":
+            return self.search_results.order_by("vendor")
+        elif criteria == "cashback":
+            return self.search_results.order_by("cashback")
         return self.search_results

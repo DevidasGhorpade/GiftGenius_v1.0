@@ -35,6 +35,8 @@
             <option value="" {% if request.GET.sort == "" %}selected{% endif %}>Sort By</option>
             <option value="price" {% if request.GET.sort == "price" %}selected{% endif %}>Price</option>
             <option value="availability" {% if request.GET.sort == "availability" %}selected{% endif %}>Availability</option>
+            <option value="vendor" {% if request.GET.sort == "vendor" %}selected{% endif %}>Vendor</option>
+            <option value="cashback" {% if request.GET.sort == "cashback" %}selected{% endif %}>Cashback</option>
         </select>
 
         <button 
