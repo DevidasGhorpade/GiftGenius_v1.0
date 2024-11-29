@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'main',
     'giftcards',
     'shop.apps.ShopConfig',
+    'faq'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
