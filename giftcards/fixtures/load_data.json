@@ -8,6 +8,8 @@
             "card_description": "A gift card to shop on Amazon.",
             "category": "RETAIL",
             "type": "DIGITAL",
+            "cashback": 2.00,
+            "vendor": "Amazon",
             "quantity": 100,
             "gift_card_image_url": "https://m.media-amazon.com/images/I/71KO5DJ0qNL.jpg",
             "creation_date": "2024-01-01T10:00:00Z",
@@ -19,10 +21,12 @@
         "pk": 2,
         "fields": {
             "card_name": "Spotify Gift Card",
-            "amount": 30.00,
+            "amount": 200.00,
             "card_description": "A gift card to enjoy Spotify Premium.",
             "category": "ENTERTAINMENT",
             "type": "DIGITAL",
+            "cashback": 10.00,
+            "vendor": "Spotify",
             "quantity": 50,
             "gift_card_image_url": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/2800/2800086_sd.jpg;maxHeight=640;maxWidth=550;format=webp",
             "creation_date": "2024-01-05T12:00:00Z",
@@ -38,10 +42,29 @@
             "card_description": "A gift card for electronics and gadgets at Best Buy.",
             "category": "RETAIL",
             "type": "PHYSICAL",
+            "cashback": 5.00,
+            "vendor": "Best Buy",
             "quantity": 30,
             "gift_card_image_url": "https://m.media-amazon.com/images/I/31rakPi6KsL._SY400_.jpg",
             "creation_date": "2024-01-10T15:00:00Z",
             "update_date": "2024-01-25T15:00:00Z"
+        }
+    },
+    {
+        "model": "giftcards.GiftCardType",
+        "pk": 4,
+        "fields": {
+            "card_name": "Wallmart Gift Card",
+            "amount": 30.00,
+            "card_description": "Wallmart gift card for every day shopping for everything.",
+            "category": "RETAIL",
+            "type": "DIGITAL",
+            "cashback": 1.00,
+            "vendor": "Wallmart",
+            "quantity": 100,
+            "gift_card_image_url": "https://i5.walmartimages.com/seo/Everyday-Blue-Gift-Walmart-eGift-Card_d434de2f-5074-464c-9b12-1ca1a591ee18.e95c64327b383a2dfcf1e05120c687fd.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF",
+            "creation_date": "2024-11-26T15:00:00Z",
+            "update_date": "2024-11-26T15:00:00Z"
         }
     }
 ]
