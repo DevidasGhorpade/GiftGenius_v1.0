@@ -26,7 +26,7 @@ class CustomUserAdmin(UserAdmin):
         'is_superuser'
     ]
     # Can't use this - results in error:
-    # fields =  ['username', 'email', 'role', 'address', 'shippingaddress', 'password1', 'password2']
+    # fields =  ['username', 'email', 'role', 'address', 'shipping_address', 'password1', 'password2']
 
     '''
     Attempt #1 - didn't work:
@@ -41,7 +41,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': (
-            'first_name', 'last_name', 'email', 'role', 'shippingaddress'
+            'first_name', 'last_name', 'email', 'role', 'shipping_address'
             )}
         ),
         (
@@ -62,7 +62,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-                'username', 'email', 'role', 'shippingaddress', 'password1', 'password2'
+                'username', 'email', 'role', 'shipping_address', 'password1', 'password2'
                 ),
             },
         ),

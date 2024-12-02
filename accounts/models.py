@@ -5,28 +5,28 @@ from giftcard_portal.utils import display
 
 
 class AddressType(models.IntegerChoices):
-    RESIDENTIAL = 1
-    COMMERCIAL = 2
-    MAILING = 3
-    SHIPPING = 4
+    RESIDENTIAL = 1, 'Residential'
+    COMMERCIAL = 2, 'Commercial'
+    MAILING = 3, 'Mailing'
+    SHIPPING = 4, 'Shipping'
 
 
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
-    userid = models.OneToOneField(
+    user_id = models.OneToOneField(
         'CustomUser', on_delete=models.CASCADE, default='', blank=True, null=True
     )
-    streetaddress1 = models.CharField(max_length=100)
-    streetaddress2 = models.CharField(max_length=100, blank=True)
+    street_address1 = models.CharField(max_length=100)
+    street_address2 = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=50)
     zip = models.CharField(max_length=10)
-    addresstype = models.IntegerField(choices=AddressType, default=1)
+    address_type = models.IntegerField(choices=AddressType, default=1)
 
     def __str__(self):
-        return display(self.streetaddress1)
+        return display(self.street_address1)
 
-    def isValidAddress(self, address):
+    def is_valid_address(self, address):
         '''
         Check if address is valid
 
@@ -36,9 +36,9 @@ class Address(models.Model):
 
 
 class UserType(models.IntegerChoices):
-    ADMIN = 1
-    CUSTOMER = 2
-    RECIPIENT = 3
+    ADMIN = 1, 'Admin'
+    CUSTOMER = 2, 'Customer'
+    RECIPIENT = 3, 'Recipient'
 
 
 class CustomUser(AbstractUser):
@@ -60,7 +60,7 @@ class CustomUser(AbstractUser):
     '''
 
     role = models.IntegerField(choices=UserType, default=2)
-    shippingaddress = models.OneToOneField(
+    shipping_address = models.OneToOneField(
         Address,
         on_delete=models.CASCADE,
         related_name='shippingaddress',
@@ -71,10 +71,10 @@ class CustomUser(AbstractUser):
 
     '''
     # Reference is in ShoppingCart class:
-    cartid = models.OneToOneField(ShoppingCart, on_delete=models.CASCADE)
+    cart_id = models.OneToOneField(ShoppingCart, on_delete=models.CASCADE)
 
     # Reference is in Payment class:
-    paymentid = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    payment_id = models.ForeignKey(Payment, on_delete=models.CASCADE)
     '''
 
     '''
