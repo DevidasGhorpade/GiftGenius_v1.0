@@ -24,4 +24,4 @@ def giftcard_list(request):
     if sort_criteria:
         giftcards = search_engine.sort_results(sort_criteria)
 
-    return render(request, 'giftcard/giftcard_list.html', {'giftcards': giftcards})
+    return render(request, 'giftcards/giftcard_list.html', {'giftcards': giftcards})

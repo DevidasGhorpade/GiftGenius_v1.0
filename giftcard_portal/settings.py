@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 3rd Party:
     'crispy_forms',
     'crispy_tailwind',
+    'django_extensions',
 
     # Local additions:
     'accounts.apps.AccountsConfig',

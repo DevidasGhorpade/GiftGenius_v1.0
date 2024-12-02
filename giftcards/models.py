@@ -1,58 +1,109 @@
 from django.db import models
-from datetime import datetime
-from enum import StrEnum
+
+from giftcard_portal.utils import display
 
 
-class GiftCardCategory(StrEnum):
-    BIRTHDAY = 'Birthday'
-    TRAVEL = 'Travel'
-    CLOTHING = 'Clothing'
-    BOOKS = 'Books'
-    RETAIL = 'Retail'
-    ENTERTAINMENT = 'Entertainment'
+class GiftCardCategory(models.IntegerChoices):
+    BABY = 1, 'Baby'
+    BIRTHDAY = 2, 'Birthday'
+    BOOKS = 3, 'Books'
+    CLOTHING = 4, 'Clothing'
+    ELECTRONICS = 5, 'Electronics'
+    ENTERTAINMENT = 6, 'Entertainment'
+    FATHERSDAY = 7, 'Fathers Day'
+    MOTHERSDAY = 8, 'Mothers Day'
+    RETAIL = 9, 'Retail'
+    TRAVEL = 10, 'Travel'
+    WEDDING = 11, 'Wedding'
 
-class CardType(StrEnum):
-    PHYSICAL = 'Physical'
-    DIGITAL = 'Digital'
+class CardType(models.IntegerChoices):
+    DIGITAL = 1, 'Digital'
+    PHYSICAL = 2, 'Physical'
 
 class GiftCardType(models.Model):
-    card_id = models.AutoField(primary_key=True)
+    card_type_id = models.AutoField(primary_key=True)
     card_name = models.CharField(max_length=100)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
     card_description = models.TextField()
-    category = models.CharField(max_length=50, choices=[(category, category.value) for category in GiftCardCategory]);
-    type = models.CharField(max_length=20, choices=[(type, type.value) for type in CardType])
+    card_category = models.IntegerField(choices=GiftCardCategory)
+    card_type = models.IntegerField(choices=CardType)
+    card_quantity = models.PositiveIntegerField()
+    card_image_url = models.URLField(max_length=500, blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
     cashback = models.DecimalField(max_digits=4, decimal_places=2, default=0.00)
     vendor = models.CharField(max_length=50)
-    quantity = models.PositiveIntegerField()
-    gift_card_image_url = models.URLField(max_length=500, blank=True, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
+    '''
+    # Reference is in BaseGiftCard class:
+    giftcard = models.ForeignKey('BaseGiftCard', on_delete=models.CASCADE)
+    '''
+
     def __str__(self):
-        return self.card_name
+        return display(self.card_name)
 
-class GiftCardStatus(StrEnum):
-    ACTIVE = 'Active'
-    INACTIVE = 'Inactive'
-    EXPIRED = 'Expiredd'
+class GiftCardStatus(models.IntegerChoices):
+    ACTIVE = 1, 'Active'
+    INACTIVE = 2, 'Inactive'
+    REDEEMED = 3, 'Redeemed'
+    EXPIRED = 4, 'Expired'
 
-class GiftCard(models.Model):
-    card_id = models.ForeignKey(GiftCardType, on_delete=models.CASCADE, related_name='gift_cards')
+class BaseGiftCard(models.Model):
+    card_id = models.AutoField(primary_key=True)
     card_number = models.CharField(max_length=50, unique=True)
-    created_date = models.DateTimeField(auto_now_add=True)
+    cvv = models.CharField(max_length=4)
+    balance = models.FloatField()
+    gift_message = models.TextField()
+    status = models.IntegerField(choices=GiftCardStatus, blank=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
     expiration_date = models.DateField()
-    cvv_number = models.CharField(max_length=10)
-    gift_card_status = models.CharField(max_length=20, choices=[(status, status.value) for status in GiftCardStatus])
+    update_date = models.DateField()
 
-    def activate(self):
-        if self.gift_card_status != 'EXPIRED':
-            self.gift_card_status = "ACTIVE"
+    def __str__(self):
+        return f"{self.card_number} ({GiftCardStatus(self.status).label})"
+
+    def activate(self, cardnumber: str):
+        if self.gift_card_status != GiftCardStatus.EXPIRED:
+            self.gift_card_status = GiftCardStatus.ACTIVE
             self.save()
 
     def deactivate(self):
-        self.gift_card_status = "INACTIVE"
+        self.gift_card_status = GiftCardStatus.INACTIVE
         self.save()
 
-    def __str__(self):
-        return f"{self.card_number} - {self.gift_card_status}"
+    def redeem(self, amount: float):
+        pass
+
+    def checkBalance(self):
+        pass
+
+class DigitalGiftCard(BaseGiftCard):
+    card_type_id = models.ForeignKey(GiftCardType, on_delete=models.CASCADE)
+    recipient = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE,
+                                  related_name='digital_recipient')
+    giver = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE,
+                              related_name='digital_giver')
+    delivery_date = models.DateField()
+
+    def schedule_delivery_date(self, delivery_date):
+        pass
+
+    def send_gift_card(self):
+        pass
+
+class ShippingMethod(models.IntegerChoices):
+    USPS = 1, 'US Postal Service'
+    UPS = 2, 'UPS'
+    FEDEX = 3, 'FedEx'
+    DHL = 4, 'DHL'
+
+class PhysicalGiftCard(BaseGiftCard):
+    card_type_id = models.ForeignKey(GiftCardType, on_delete=models.CASCADE)
+    recipient = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE,
+                                  related_name='physical_recipient')
+    giver = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE,
+                              related_name='physical_giver')
+    shipping_method = models.IntegerField(choices=ShippingMethod)
+
+    def ship_gift_card(self):
+        pass
