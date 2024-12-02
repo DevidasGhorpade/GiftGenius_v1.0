@@ -8,29 +8,29 @@
     <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 mb-8">Available Gift Cards</h2>
 
     <form method="get" action="{% url 'giftcard_list' %}" class="mb-8 flex flex-wrap items-center gap-4 bg-gray-100 p-4 rounded-lg shadow-sm">
-        <input 
-            type="text" 
-            name="search" 
-            placeholder="Search by name" 
+        <input
+            type="text"
+            name="search"
+            placeholder="Search by name"
             value="{{ request.GET.search|default:'' }}"
             class="border p-2 rounded-lg w-full sm:w-auto flex-1 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 
-        <input 
-            type="number" 
-            name="min_amount" 
-            placeholder="Min Amount" 
+        <input
+            type="number"
+            name="min_amount"
+            placeholder="Min Amount"
             value="{{ request.GET.min_amount|default:'' }}"
             class="border p-2 rounded-lg w-full sm:w-auto flex-1 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 
-        <input 
-            type="number" 
-            name="max_amount" 
-            placeholder="Max Amount" 
+        <input
+            type="number"
+            name="max_amount"
+            placeholder="Max Amount"
             value="{{ request.GET.max_amount|default:'' }}"
             class="border p-2 rounded-lg w-full sm:w-auto flex-1 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 
-        <select 
-            name="sort" 
+        <select
+            name="sort"
             class="border p-2 rounded-lg w-full sm:w-auto flex-1 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
             <option value="" {% if request.GET.sort == "" %}selected{% endif %}>Sort By</option>
             <option value="price" {% if request.GET.sort == "price" %}selected{% endif %}>Price</option>
@@ -39,8 +39,8 @@
             <option value="cashback" {% if request.GET.sort == "cashback" %}selected{% endif %}>Cashback</option>
         </select>
 
-        <button 
-            type="submit" 
+        <button
+            type="submit"
             class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition focus:outline-none">
             Search
         </button>
@@ -54,7 +54,7 @@
       {% for card in giftcards %}
       <div class="group block bg-white p-6 border rounded-lg shadow hover:shadow-lg transition duration-300 max-w-xs mx-auto h-80 flex flex-col justify-between">
         <div class="aspect-w-16 aspect-h-9 w-full overflow-hidden rounded-lg bg-gray-200">
-          <img src="{{ card.gift_card_image_url }}" alt="{{ card.card_name }}" class="h-40 w-full object-cover object-center group-hover:opacity-75">
+          <img src="{{ card.card_image_url }}" alt="{{ card.card_name }}" class="h-40 w-full object-cover object-center group-hover:opacity-75">
         </div>
         <div class="mt-4 text-center flex-grow">
           <h3 class="text-lg font-semibold text-gray-800 truncate">{{ card.card_name }}</h3>

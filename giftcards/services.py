@@ -1,4 +1,4 @@
-from .models import GiftCardType, GiftCard
+from .models import GiftCardType, BaseGiftCard
 from django.db.models import Q
 
 class GiftCardCatalog:
@@ -15,7 +15,7 @@ class GiftCardCatalog:
             return None
 
     def get_gift_cards_by_status(self, status):
-        return GiftCard.objects.filter(gift_card_status=status)
+        return BaseGiftCard.objects.filter(status=status)
 
 
 class SearchEngine:
@@ -31,11 +31,11 @@ class SearchEngine:
     def sort_results(self, criteria):
         if not self.search_results:
             self.search_results = GiftCardType.objects.all()
-            
+
         if criteria == "price":
             return self.search_results.order_by("amount")
         elif criteria == "availability":
-            return self.search_results.order_by("quantity")
+            return self.search_results.order_by("card_quantity")
         elif criteria == "vendor":
             return self.search_results.order_by("vendor")
         elif criteria == "cashback":
