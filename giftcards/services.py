@@ -1,4 +1,4 @@
-from .models import GiftCardType, GiftCard
+from .models import GiftCardType, BaseGiftCard
 from django.db.models import Q
 
 class GiftCardCatalog:
@@ -15,7 +15,7 @@ class GiftCardCatalog:
             return None
 
     def get_gift_cards_by_status(self, status):
-        return GiftCard.objects.filter(gift_card_status=status)
+        return BaseGiftCard.objects.filter(status=status)
 
 
 class SearchEngine:
