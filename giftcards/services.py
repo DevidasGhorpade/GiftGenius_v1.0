@@ -40,13 +40,7 @@ class SearchEngine:
         }
 
         match criteria:
-            case "price":
-                sort_field = sort_fields[criteria]
-            case "availability":
-                sort_field = sort_fields[criteria]
-            case "vendor":
-                sort_field = sort_fields[criteria]
-            case "cashback":
+            case "price" | "availability" | "vendor" | "cashback":
                 sort_field = sort_fields[criteria]
             case _:
                 sort_field = None
