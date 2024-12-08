@@ -25,3 +25,11 @@ def giftcard_list(request):
         giftcards = search_engine.sort_results(sort_criteria)
 
     return render(request, 'giftcards/giftcard_list.html', {'giftcards': giftcards})
+
+def giftcard_detail(request, card_type_id):
+    try:
+        giftcard = GiftCardType.objects.get(card_type_id=card_type_id)
+    except GiftCardType.DoesNotExist:
+        return render(request, '404.html', status=404)
+
+    return render(request, 'giftcards/giftcard_details.html', {'giftcard': giftcard})
