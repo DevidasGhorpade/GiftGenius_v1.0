@@ -34,7 +34,7 @@ class SearchEngine:
 
         sort_fields = {
             "price": "amount",
-            "availability": "quantity",
+            "availability": "card_quantity",
             "vendor": "vendor",
             "cashback": "cashback"
         }
