@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block title %}FAQ{% endblock title %}
+
+{% block content %}
+<section class="container mx-auto mt-24 px-0 py-10">
+    <div>
+        <h2 style="font-size: 36px; font-weight: bold;">Frequently Asked Questions</h2>
+    </div>
+</section>
+
+<section style="margin-bottom: 40px;">
+    <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">General Questions</h2>
+        <ul style="list-style-type: none; padding: 0;">
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">What is a digital gift card?</h3>
+                <p style="line-height: 1.6;">A digital gift card is an electronic code that can be redeemed online or in-store at a specific retailer.</p>
+            </li>
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">How do I purchase a gift card?</h3>
+                <p style="line-height: 1.6;">You can purchase a gift card directly from our website. Simply select the desired gift card, choose the amount, and proceed to checkout.</p>
+            </li>
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">How do I redeem a digital gift card?</h3>
+                <p style="line-height: 1.6;">The redemption process varies by retailer. You'll typically find the redemption instructions on the gift card or in the email confirmation.</p>
+            </li>
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">Can I return a gift card?</h3>
+                <p style="line-height: 1.6;">Gift cards are generally non-refundable, unless required by law.</p>
+            </li>
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">Is there an expiration date for gift cards?</h3>
+                <p style="line-height: 1.6;">Yes, most gift cards have an expiration date. Please check the specific terms and conditions of the gift card.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section style="margin-bottom: 40px;">
+        <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">Technical Questions</h2>
+        <ul style="list-style-type: none; padding: 0;">
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">What if I lose my gift card code?</h3>
+                <p style="line-height: 1.6;">Unfortunately, we cannot recover lost gift card codes. Please treat your gift card code like cash.</p>
+            </li>
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">Can I use multiple gift cards in one transaction?</h3>
+                <p style="line-height: 1.6;">It depends on the retailer's policy. Some retailers allow multiple gift cards to be used in one transaction, while others may have restrictions.</p>
+            </li>
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">Is my personal information safe?</h3>
+                <p style="line-height: 1.6;">Yes, we use industry-standard security measures to protect your personal information.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section style="margin-bottom: 40px;">
+        <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">Ordering and Shipping</h2>
+        <ul style="list-style-type: none; padding: 0;">
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">How long does it take to receive a physical gift card?</h3>
+                <p style="line-height: 1.6;">Shipping times vary depending on your location and the shipping method chosen. Please refer to our shipping policy for more details.</p>
+            </li>
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">What happens if my gift card is damaged or lost in transit?</h3>
+                <p style="line-height: 1.6;">If your physical gift card is damaged or lost in transit, please contact our customer support team for assistance.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section style="margin-bottom: 40px;">
+        <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">Customer Support</h2>
+        <ul style="list-style-type: none; padding: 0;">
+            <li style="margin-bottom: 15px;">
+                <h3 style="font-weight: bold; margin-bottom: 10px;">How can I contact customer support?</h3>
+                <p style="line-height: 1.6;">You can contact our customer support team via email or phone. Please refer to our Contact Us page for more information.</p>
+            </li>
+        </ul>
+    </section>
+{% endblock content %}
