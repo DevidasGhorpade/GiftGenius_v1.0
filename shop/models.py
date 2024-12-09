@@ -1,45 +1,63 @@
 from django.db import models
-
-from giftcards.models import GiftCardStatus
+from accounts.models import CustomUser
+from giftcards.models import GiftCardType, GiftCardStatus
 from giftcard_portal.utils import display
-
 
 class ShoppingCart(models.Model):
     cart_id = models.AutoField(primary_key=True)
-    user_id = models.OneToOneField(
-        # Note:  on_delete=CASCADE is more like composition than aggregation:
-        'accounts.CustomUser', on_delete=models.CASCADE, blank=True, null=True
-    )
-    '''
-    # Reference is in ShoppingCartItem class:
-    item_id = models.ForeignKey(ShoppingCartItem, on_delete=CASCADE)
-    '''
+    user_id = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     order_total = models.FloatField(default=0.0)
-
-    # Session management handled by Django - don't need where requiring current
-    # user (accounts.CustomUser)
 
     def __str__(self):
         return f'{self.user_id}({self.cart_id})'
 
-    def add_item(self, giftcard):
-        pass
+    def add_item(self, giftcard, quantity):
+        if quantity > giftcard.card_quantity:
+            raise ValueError(f"Only {giftcard.card_quantity} units of {giftcard.card_name} are available.")
+
+        existing_item = self.cart_items.filter(card_type_id=giftcard).first()
+        if existing_item:
+            existing_item.quantity += quantity
+            existing_item.save()
+        else:
+            ShoppingCartItem.objects.create(cart_id=self, card_type_id=giftcard, quantity=quantity)
+
+        self.update_order_total()
 
     def remove_item(self, giftcard):
-        pass
+        self.cart_items.filter(card_type_id=giftcard).delete()
+        self.update_order_total()
 
     def update_order_total(self):
-        pass
+        self.order_total = sum(
+            item.quantity * item.card_type_id.amount for item in self.cart_items.all()
+        )
+        self.save()
+
+    def validate_cart(self):
+        for item in self.cart_items.all():
+            if item.quantity > item.card_type_id.card_quantity:
+                raise ValueError(f"Insufficient stock for {item.card_type_id.card_name}")
+
+    def clear_cart(self):
+        self.cart_items.all().delete()
+        self.update_order_total()
+
+    def get_items(self):
+        return self.cart_items.all()
 
 
 class ShoppingCartItem(models.Model):
     item_id = models.AutoField(primary_key=True)
-    cart_id = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-    card_type_id = models.ForeignKey('giftcards.GiftCardType', on_delete=models.CASCADE)
+    cart_id = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, related_name='cart_items')
+    card_type_id = models.ForeignKey(GiftCardType, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
         return f'{display(self.card_type_id.card_name)} x {self.quantity}'
+
+    def total_cost(self):
+        return self.quantity * self.card_type_id.amount
 
 
 class PaymentMethod(models.Model):
@@ -78,7 +96,12 @@ class Payment(models.Model):
         return f'{self.user_id.username} - {self.payment_method.name} for {self.amount:,.2f}'
 
     def process_payment(self):
-        pass
+        if self.payment_method and self.amount > 0:
+            self.status = "Completed"
+            self.save()
+            return True
+        
+        return False
 
 
 class OrderStatus(models.IntegerChoices):
@@ -108,7 +131,10 @@ class Order(models.Model):
         return f'{self.user_id.username} for {self.recipient.username} - {self.order_total:,.2f}'
 
     def update_order_total(self):
-        pass
+        self.order_total = sum(
+           item.quantity * item.card_id.amount for item in self.orderitem_set.all()
+        )
+        self.save()
 
 
 class OrderItem(models.Model):
