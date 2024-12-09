@@ -32,12 +32,22 @@ class SearchEngine:
         if not self.search_results:
             self.search_results = GiftCardType.objects.all()
 
-        if criteria == "price":
-            return self.search_results.order_by("amount")
-        elif criteria == "availability":
-            return self.search_results.order_by("card_quantity")
-        elif criteria == "vendor":
-            return self.search_results.order_by("vendor")
-        elif criteria == "cashback":
-            return self.search_results.order_by("cashback")
-        return self.search_results
+        sort_fields = {
+            "price": "amount",
+            "availability": "card_quantity",
+            "vendor": "vendor",
+            "cashback": "cashback"
+        }
+
+        match criteria:
+            case "price" | "availability" | "vendor" | "cashback":
+                sort_field = sort_fields[criteria]
+            case _:
+                sort_field = None
+
+        if sort_field:
+            sorted_results = self.search_results.order_by(sort_field)
+        else:
+            sorted_results = self.search_results
+
+        return sorted_results

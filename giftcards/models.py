@@ -1,7 +1,20 @@
+from datetime import datetime, timedelta
 from django.db import models
 
 from giftcard_portal.utils import display
 
+
+class GiftCardError(Exception):
+    pass
+
+class InactiveError(GiftCardError):
+    pass
+
+class InsufficientFundsError(GiftCardError):
+    pass
+
+class InvalidDeliveryDateError(GiftCardError):
+    pass
 
 class GiftCardCategory(models.IntegerChoices):
     BABY = 1, 'Baby'
@@ -60,7 +73,7 @@ class BaseGiftCard(models.Model):
     update_date = models.DateField()
 
     def __str__(self):
-        return f"{self.card_number} ({GiftCardStatus(self.status).label})"
+        return f'{self.card_number} ({GiftCardStatus(self.status).label})'
 
     def activate(self, cardnumber: str):
         if self.gift_card_status != GiftCardStatus.EXPIRED:
@@ -72,10 +85,20 @@ class BaseGiftCard(models.Model):
         self.save()
 
     def redeem(self, amount: float):
-        pass
+        if self.gift_card_status != GiftCardStatus.ACTIVE:
+            raise InactiveError('Card must be activated before use.')
+
+        if amount > self.balance:
+            raise InsufficientFundsError('Insufficient funds available on card.')
+
+        self.gift_card_status = GiftCardStatus.REDEEMED
+        self.balance -= amount
 
     def checkBalance(self):
-        pass
+        if self.gift_card_status != GiftCardStatus.ACTIVE:
+            raise InactiveError('Card must be activated before use.')
+
+        return self.balance
 
 class DigitalGiftCard(BaseGiftCard):
     card_type_id = models.ForeignKey(GiftCardType, on_delete=models.CASCADE)
@@ -86,10 +109,14 @@ class DigitalGiftCard(BaseGiftCard):
     delivery_date = models.DateField()
 
     def schedule_delivery_date(self, delivery_date):
-        pass
+        if delivery_date < datetime.now() or delivery_date > datetime.now() + timedelta(days=365):
+            raise InvalidDeliveryDateError(
+                'Delivery date cannot be in the past or more than a year in the future.'
+            )
+        self.delivery_date = delivery_date
 
     def send_gift_card(self):
-        pass
+        self.recipient.email_user('Your gift card!', self, self.giver.email)
 
 class ShippingMethod(models.IntegerChoices):
     USPS = 1, 'US Postal Service'

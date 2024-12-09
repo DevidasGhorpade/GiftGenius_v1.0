@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from giftcard_portal.utils import display
+from giftcards.models import GiftCardCategory
 
 
 class AddressType(models.IntegerChoices):
@@ -59,6 +60,7 @@ class CustomUser(AbstractUser):
     )
     '''
 
+    preferred_category = models.IntegerField(choices=GiftCardCategory, null=True)
     role = models.IntegerField(choices=UserType, default=2)
     shipping_address = models.OneToOneField(
         Address,
