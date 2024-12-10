@@ -55,16 +55,135 @@
         "pk": 4,
         "fields": {
             "card_name": "Walmart Gift Card",
-            "card_description": "Wallmart gift card for every day shopping for everything.",
+            "card_description": "Walmart gift card for everyday shopping for everything.",
             "card_category": 9,
             "card_type": 2,
             "card_quantity": 100,
             "card_image_url": "https://i5.walmartimages.com/seo/Everyday-Blue-Gift-Walmart-eGift-Card_d434de2f-5074-464c-9b12-1ca1a591ee18.e95c64327b383a2dfcf1e05120c687fd.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF",
             "amount": 30.00,
             "cashback": 1.00,
-            "vendor": "Wallmart",
+            "vendor": "Walmart",
             "creation_date": "2024-11-26T15:00:00Z",
             "update_date": "2024-11-26T15:00:00Z"
+        }
+    },
+    {
+        "model": "giftcards.GiftCardType",
+        "pk": 5,
+        "fields": {
+            "card_name": "Starbucks Gift Card",
+            "card_description": "Enjoy coffee, tea, and treats at Starbucks.",
+            "card_category": 6,
+            "card_type": 1,
+            "card_quantity": 75,
+            "card_image_url": "https://globalassets.starbucks.com/digitalassets/cards/fy20/BrailleFY20.jpg",
+            "amount": 25.00,
+            "cashback": 1.50,
+            "vendor": "Starbucks",
+            "creation_date": "2024-02-01T09:00:00Z",
+            "update_date": "2024-02-10T09:00:00Z"
+        }
+    },
+    {
+        "model": "giftcards.GiftCardType",
+        "pk": 6,
+        "fields": {
+            "card_name": "Apple Gift Card",
+            "card_description": "A gift card for Apple products, apps, and subscriptions.",
+            "card_category": 5,
+            "card_type": 1,
+            "card_quantity": 40,
+            "card_image_url": "https://livecards.net/pi/apple-gift-card-20-usd-us-74435.jpg",
+            "amount": 100.00,
+            "cashback": 3.00,
+            "vendor": "Apple",
+            "creation_date": "2024-03-01T10:00:00Z",
+            "update_date": "2024-03-15T10:00:00Z"
+        }
+    },
+    {
+        "model": "giftcards.GiftCardType",
+        "pk": 7,
+        "fields": {
+            "card_name": "Google Play Gift Card",
+            "card_description": "A gift card to enjoy apps, games, and more on Google Play.",
+            "card_category": 5,
+            "card_type": 1,
+            "card_quantity": 60,
+            "card_image_url": "https://www.giftstation.co.nz/media/catalog/product/cache/805f723204a5f09db06b08b4500ccfcf/g/s/gs_giftcards_frontart_googelplay.png",
+            "amount": 50.00,
+            "cashback": 2.50,
+            "vendor": "Google",
+            "creation_date": "2024-04-01T10:00:00Z",
+            "update_date": "2024-04-15T10:00:00Z"
+        }
+    },
+    {
+        "model": "giftcards.GiftCardType",
+        "pk": 8,
+        "fields": {
+            "card_name": "Nike Gift Card",
+            "card_description": "Perfect for athletes and fitness enthusiasts.",
+            "card_category": 4,
+            "card_type": 2,
+            "card_quantity": 25,
+            "card_image_url": "https://productimages.nimbledeals.com/gift_card_skin/3de64ea8bdddd7f52964569c8c3038_1",
+            "amount": 150.00,
+            "cashback": 7.50,
+            "vendor": "Nike",
+            "creation_date": "2024-05-01T14:00:00Z",
+            "update_date": "2024-05-10T14:00:00Z"
+        }
+    },
+    {
+        "model": "giftcards.GiftCardType",
+        "pk": 9,
+        "fields": {
+            "card_name": "Target Gift Card",
+            "card_description": "Shop for everything you need at Target.",
+            "card_category": 9,
+            "card_type": 2,
+            "card_quantity": 90,
+            "card_image_url": "https://www.themontessorischool.org/uploads/1/4/0/7/140709692/s778706779831320800_p6_i1_w610.png",
+            "amount": 75.00,
+            "cashback": 3.00,
+            "vendor": "Target",
+            "creation_date": "2024-06-01T10:00:00Z",
+            "update_date": "2024-06-15T10:00:00Z"
+        }
+    },
+    {
+        "model": "giftcards.GiftCardType",
+        "pk": 10,
+        "fields": {
+            "card_name": "PlayStation Gift Card",
+            "card_description": "A gift card for PlayStation games and services.",
+            "card_category": 6,
+            "card_type": 1,
+            "card_quantity": 45,
+            "card_image_url": "https://dundle.com/resources/images/products/product-google-search/playstation-4x3.png",
+            "amount": 60.00,
+            "cashback": 2.50,
+            "vendor": "Sony",
+            "creation_date": "2024-07-01T12:00:00Z",
+            "update_date": "2024-07-15T12:00:00Z"
+        }
+    },
+    {
+        "model": "giftcards.GiftCardType",
+        "pk": 11,
+        "fields": {
+            "card_name": "Uber Gift Card",
+            "card_description": "Perfect for rides and food deliveries.",
+            "card_category": 10,
+            "card_type": 1,
+            "card_quantity": 50,
+            "card_image_url": "https://livecards.net/pi/uber-gift-card-15-usd-us-74260.jpg",
+            "amount": 100.00,
+            "cashback": 4.00,
+            "vendor": "Uber",
+            "creation_date": "2024-08-01T08:00:00Z",
+            "update_date": "2024-08-10T08:00:00Z"
         }
     }
 ]
