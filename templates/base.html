@@ -24,7 +24,7 @@
             <nav>
                 {% if user and user.is_authenticated %}
                     <a href="{% url 'giftcard_list' %}" class="nav-link">Gift Cards</a>
-                    <a href="{% url 'shop' %}" class="nav-link">Shopping Cart</a>
+                    <a href="{% url 'cart_summary' %}" class="nav-link">Shopping Cart</a>
                 {% endif %}
                 {% if user and user.is_superuser %}
                     <!-- URL form preferered but not sure what it is... -->

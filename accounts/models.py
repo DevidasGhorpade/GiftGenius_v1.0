@@ -14,26 +14,39 @@ class AddressType(models.IntegerChoices):
 
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.OneToOneField(
+
+    # Note:  Django automatically appends _id to this field:
+    '''
+    user = models.OneToOneField(
         'CustomUser', on_delete=models.CASCADE, default='', blank=True, null=True
     )
+    '''
     street_address1 = models.CharField(max_length=100)
     street_address2 = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=50)
-    zip = models.CharField(max_length=10)
+    zip_code = models.CharField(max_length=10)
     address_type = models.IntegerField(choices=AddressType, default=1)
 
     def __str__(self):
-        return display(self.street_address1)
+        return display(f'{self.street_address1}, {self.city}, {self.state} {self.zip_code}')
 
     def is_valid_address(self, address):
         '''
         Check if address is valid
 
         Look at https://www.usps.com/business/web-tools-apis/
+
+        Future...
         '''
         pass
+
+    def compare(self, other):
+        if not isinstance(other, Address):
+            raise TypeError('Expected Address type')
+
+        fields = ('street_address1', 'street_address2', 'city', 'state', 'zip_code', 'address_type')
+        return all(getattr(self, field) == getattr(other, field) for field in fields)
 
 
 class UserType(models.IntegerChoices):
@@ -60,8 +73,12 @@ class CustomUser(AbstractUser):
     )
     '''
 
-    preferred_category = models.IntegerField(choices=GiftCardCategory, null=True)
+    address = models.ForeignKey(
+        Address, on_delete=models.CASCADE, default='', blank=True, null=True
+    )
+    preferred_category = models.IntegerField(choices=GiftCardCategory, blank=True, null=True)
     role = models.IntegerField(choices=UserType, default=2)
+    '''
     shipping_address = models.OneToOneField(
         Address,
         on_delete=models.CASCADE,
@@ -70,6 +87,7 @@ class CustomUser(AbstractUser):
         blank=True,
         null=True
     )
+    '''
 
     '''
     # Reference is in ShoppingCart class:

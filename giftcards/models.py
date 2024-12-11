@@ -65,6 +65,8 @@ class BaseGiftCard(models.Model):
     card_id = models.AutoField(primary_key=True)
     card_number = models.CharField(max_length=50, unique=True)
     cvv = models.CharField(max_length=4)
+    card_holder_name = models.CharField(max_length=100)
+    card_holder_address = models.OneToOneField('accounts.Address', on_delete=models.CASCADE)
     balance = models.FloatField()
     gift_message = models.TextField()
     status = models.IntegerField(choices=GiftCardStatus, blank=True)
@@ -101,7 +103,8 @@ class BaseGiftCard(models.Model):
         return self.balance
 
 class DigitalGiftCard(BaseGiftCard):
-    card_type_id = models.ForeignKey(GiftCardType, on_delete=models.CASCADE)
+    # Note:  Django automatically appends _id to this field:
+    card_type = models.ForeignKey(GiftCardType, on_delete=models.CASCADE)
     recipient = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE,
                                   related_name='digital_recipient')
     giver = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE,
@@ -125,7 +128,8 @@ class ShippingMethod(models.IntegerChoices):
     DHL = 4, 'DHL'
 
 class PhysicalGiftCard(BaseGiftCard):
-    card_type_id = models.ForeignKey(GiftCardType, on_delete=models.CASCADE)
+    # Note:  Django automatically appends _id to this field:
+    card_type = models.ForeignKey(GiftCardType, on_delete=models.CASCADE)
     recipient = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE,
                                   related_name='physical_recipient')
     giver = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE,

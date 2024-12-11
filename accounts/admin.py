@@ -41,7 +41,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': (
-            'first_name', 'last_name', 'email', 'preferred_category', 'role', 'shipping_address'
+            'first_name', 'last_name', 'email', 'preferred_category', 'role', 'address'
             )}
         ),
         (
@@ -62,7 +62,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-                'username', 'email', 'preferred_category', 'role', 'shipping_address',
+                'username', 'email', 'preferred_category', 'role', 'address',
                 'password1', 'password2'
                 ),
             },
