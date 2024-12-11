@@ -1,12 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
-from giftcards.models import GiftCardType
+from giftcards.models import GiftCardCategory, GiftCardType
 from .services import GiftCardCatalog, SearchEngine
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def giftcard_list(request):
-    catalog = GiftCardCatalog()
+    if not request.user.preferred_category:
+        giftcard_categories = [(choice.value, choice.label) for choice in GiftCardCategory]
+        return render(request, 'giftcards/set_preference.html', {
+            'giftcard_categories': giftcard_categories,
+        })
+
+    preferred_category = request.user.preferred_category
     search_engine = SearchEngine()
 
     query = request.GET.get('search', '')
@@ -15,16 +21,24 @@ def giftcard_list(request):
     sort_criteria = request.GET.get('sort')
 
     if query:
-        giftcards = search_engine.perform_search(query)
-    elif min_amount and max_amount:
-        giftcards = catalog.filter_gift_card_types_by_amount(float(min_amount), float(max_amount))
+        search_results = search_engine.perform_search(query)
     else:
-        giftcards = catalog.search_gift_card_type('')
+        search_results = GiftCardType.objects.all()
+    
+    if min_amount and max_amount:
+        search_results = search_results.filter(amount__gte=min_amount, amount__lte=max_amount)
 
+    preferred_cards = search_results.filter(card_category=preferred_category)
+    other_cards = search_results.exclude(card_category=preferred_category)
+    
     if sort_criteria:
-        giftcards = search_engine.sort_results(sort_criteria)
+        preferred_cards = search_engine.sort_results(sort_criteria, preferred_cards)
+        other_cards = search_engine.sort_results(sort_criteria, other_cards)
 
-    return render(request, 'giftcards/giftcard_list.html', {'giftcards': giftcards})
+    return render(request, 'giftcards/giftcard_list.html', {
+        'preferred_cards': preferred_cards,
+        'other_cards': other_cards,
+    })
 
 def giftcard_detail(request, card_type_id):
     try:
@@ -33,3 +47,14 @@ def giftcard_detail(request, card_type_id):
         return render(request, '404.html', status=404)
 
     return render(request, 'giftcards/giftcard_details.html', {'giftcard': giftcard})
+
+@login_required(login_url='login')
+def set_preferred_category(request):
+    if request.method == 'POST':
+        preferred_category = request.POST.get('preferred_category')
+        if preferred_category:
+            request.user.preferred_category = preferred_category
+            request.user.save()
+            return redirect('giftcard_list')
+
+    return redirect('giftcard_list')

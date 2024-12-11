@@ -28,9 +28,9 @@ class SearchEngine:
         )
         return self.search_results
 
-    def sort_results(self, criteria):
-        if not self.search_results:
-            self.search_results = GiftCardType.objects.all()
+    def sort_results(self, criteria, queryset=None):
+        if queryset is None:
+            queryset = self.search_results or GiftCardType.objects.all()
 
         sort_fields = {
             "price": "amount",
@@ -46,8 +46,8 @@ class SearchEngine:
                 sort_field = None
 
         if sort_field:
-            sorted_results = self.search_results.order_by(sort_field)
+            queryset = queryset.order_by(sort_field)
         else:
-            sorted_results = self.search_results
+            queryset = self.search_results
 
-        return sorted_results
+        return queryset

@@ -8,7 +8,7 @@
         <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Order Summary</h2>
 
         <div class="mb-6">
-            <p class="text-lg text-gray-700">Thank you for your purchase, <strong>{{ order.user_id.username }}</strong>!</p>
+            <p class="text-lg text-gray-700">Thank you for your purchase, <strong>{{ order.user.username }}</strong>!</p>
             <p class="text-lg text-gray-700 mt-2">Your order ID is <strong>#{{ order.order_id }}</strong>.</p>
             <p class="text-lg text-gray-700 mt-2">Recipient: <strong>{{ order.recipient.username }}</strong></p>
         </div>
