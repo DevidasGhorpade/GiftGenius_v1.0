@@ -41,4 +41,5 @@ urlpatterns = [
     path('giftcards/', include('giftcards.urls')),
     path('shop/', include('shop.urls')),
     path('', include('main.urls')),
+    path('faq/', include('faq.urls')),
 ]

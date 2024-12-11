@@ -25,6 +25,7 @@
                 {% if user and user.is_authenticated %}
                     <a href="{% url 'giftcard_list' %}" class="nav-link">Gift Cards</a>
                     <a href="{% url 'cart_summary' %}" class="nav-link">Shopping Cart</a>
+                    <a href="{% url 'display_faq' %}" class="nav-link">FAQ</a>
                 {% endif %}
                 {% if user and user.is_superuser %}
                     <!-- URL form preferered but not sure what it is... -->
@@ -44,6 +45,7 @@
                 {% else %}
                     <a href="{% url 'login' %}" class="nav-link">Login</a>
                     <a href="{% url 'register' %}" class="nav-link">Register</a>
+                    <a href="{% url 'display_faq' %}" class="nav-link">FAQ</a>
                 {% endif %}
             </nav>
         </div>
