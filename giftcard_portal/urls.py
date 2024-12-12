@@ -38,8 +38,8 @@ urlpatterns = [
 
     # Local apps - believe need to order from most to least specific:
     path('accounts/', include('accounts.urls')),
+    path('faq/', include('faq.urls')),
     path('giftcards/', include('giftcards.urls')),
     path('shop/', include('shop.urls')),
     path('', include('main.urls')),
-    path('faq/', include('faq.urls')),
 ]

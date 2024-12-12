@@ -14,17 +14,12 @@ class AddressType(models.IntegerChoices):
 
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
-
-    # Note:  Django automatically appends _id to this field:
-    '''
-    user = models.OneToOneField(
-        'CustomUser', on_delete=models.CASCADE, default='', blank=True, null=True
-    )
-    '''
     street_address1 = models.CharField(max_length=100)
     street_address2 = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=50)
+
+    # Note:  Name zip_code, not zip as the latter is a built-in function
     zip_code = models.CharField(max_length=10)
     address_type = models.IntegerField(choices=AddressType, default=1)
 
@@ -65,39 +60,18 @@ class CustomUser(AbstractUser):
     * last_name = models.CharField(...)
     * email = models.EmailField(...)
     '''
-
-    '''
-    # Don't want here - instead put in Address:
-    address = models.OneToOneField(
-        Address, on_delete=models.CASCADE, default='', blank=True
-    )
-    '''
-
     address = models.ForeignKey(
         Address, on_delete=models.CASCADE, default='', blank=True, null=True
     )
     preferred_category = models.IntegerField(choices=GiftCardCategory, blank=True, null=True)
     role = models.IntegerField(choices=UserType, default=2)
     '''
-    shipping_address = models.OneToOneField(
-        Address,
-        on_delete=models.CASCADE,
-        related_name='shippingaddress',
-        default='',
-        blank=True,
-        null=True
-    )
-    '''
+    * Reference is in ShoppingCart class:
+    cart = models.OneToOneField(ShoppingCart, on_delete=models.CASCADE)
 
-    '''
-    # Reference is in ShoppingCart class:
-    cart_id = models.OneToOneField(ShoppingCart, on_delete=models.CASCADE)
+    * Reference is in Payment class:
+    payment_set = models.ForeignKey(Payment, on_delete=models.CASCADE)
 
-    # Reference is in Payment class:
-    payment_id = models.ForeignKey(Payment, on_delete=models.CASCADE)
-    '''
-
-    '''
     Contains methods:
     * set_password(password)
     * check_password(password)

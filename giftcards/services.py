@@ -45,9 +45,5 @@ class SearchEngine:
             case _:
                 sort_field = None
 
-        if sort_field:
-            queryset = queryset.order_by(sort_field)
-        else:
-            queryset = self.search_results
-
+        queryset = queryset.order_by(sort_field) if sort_field else self.search_results
         return queryset

@@ -24,13 +24,13 @@ def giftcard_list(request):
         search_results = search_engine.perform_search(query)
     else:
         search_results = GiftCardType.objects.all()
-    
+
     if min_amount and max_amount:
         search_results = search_results.filter(amount__gte=min_amount, amount__lte=max_amount)
 
     preferred_cards = search_results.filter(card_category=preferred_category)
     other_cards = search_results.exclude(card_category=preferred_category)
-    
+
     if sort_criteria:
         preferred_cards = search_engine.sort_results(sort_criteria, preferred_cards)
         other_cards = search_engine.sort_results(sort_criteria, other_cards)
@@ -51,8 +51,7 @@ def giftcard_detail(request, card_type_id):
 @login_required(login_url='login')
 def set_preferred_category(request):
     if request.method == 'POST':
-        preferred_category = request.POST.get('preferred_category')
-        if preferred_category:
+        if preferred_category := request.POST.get('preferred_category'):
             request.user.preferred_category = preferred_category
             request.user.save()
             return redirect('giftcard_list')

@@ -49,7 +49,7 @@ class GiftCardType(models.Model):
 
     '''
     # Reference is in BaseGiftCard class:
-    giftcard = models.ForeignKey('BaseGiftCard', on_delete=models.CASCADE)
+    basegiftcard_set = models.ForeignKey('BaseGiftCard', on_delete=models.CASCADE)
     '''
 
     def __str__(self):
@@ -96,7 +96,7 @@ class BaseGiftCard(models.Model):
         self.gift_card_status = GiftCardStatus.REDEEMED
         self.balance -= amount
 
-    def checkBalance(self):
+    def check_balance(self):
         if self.gift_card_status != GiftCardStatus.ACTIVE:
             raise InactiveError('Card must be activated before use.')
 
@@ -137,4 +137,7 @@ class PhysicalGiftCard(BaseGiftCard):
     shipping_method = models.IntegerField(choices=ShippingMethod)
 
     def ship_gift_card(self):
+        '''
+        Future implementation...
+        '''
         pass

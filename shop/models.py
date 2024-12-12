@@ -70,7 +70,7 @@ class PaymentMethod(models.Model):
     payment_method_id = models.AutoField(primary_key=True)
     '''
     # Reference is in Payment class:
-    payment_id = models.OneToOneField(Payment, on_delete=SET_NULL, null=True)
+    payment = models.OneToOneField(Payment, on_delete=SET_NULL, null=True)
     '''
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
@@ -87,6 +87,9 @@ class PaymentMethod(models.Model):
         return display(self.name)
 
     def validate_payment_method(self):
+        '''
+        Future implementation...
+        '''
         pass
 
 
@@ -98,7 +101,7 @@ class Payment(models.Model):
     user = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     '''
     # Reference is in Order class:
-    order_id = models.OneToOneField(Order, on_delete=models.CASCADE)
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
     '''
     amount = models.FloatField()
     status = models.CharField(max_length=20, blank=True)
@@ -133,7 +136,7 @@ class Order(models.Model):
     user = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
     '''
     # Reference is in OrderItem class:
-    item_id = models.ForeignKey(OrderItem, on_delete=CASCADE)
+    orderitem_set = models.ForeignKey(OrderItem, on_delete=CASCADE)
     '''
     order_date = models.DateTimeField(auto_now_add=True)
     order_status = models.IntegerField(choices=OrderStatus, default=1)

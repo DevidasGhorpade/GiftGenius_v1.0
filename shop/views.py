@@ -139,7 +139,6 @@ def review_order(request):
             * Remove items from cart
             * Remove/deduct items from inventory
             * Display Order Summary page
-            Bonus:  See if can show digital/plastic delivery
         2) Cancel
 
         Either way, then return to Gift Cards page
