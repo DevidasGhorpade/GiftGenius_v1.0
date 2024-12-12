@@ -1,80 +1,71 @@
 {% extends "base.html" %}
-
-{% block title %} Shop - Review Order {% endblock title %}
-
+{% block title %}
+    Shop - Review Order
+{% endblock title %}
 {% block content %}
-<section class="bg-white">
-    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 mb-8">Review Your Order</h2>
-
-        <div id="cart-items" class="grid grid-cols-1 gap-4">
-            {% for item in cart.get_items %}
-            <div class="p-4 bg-gray-100 border rounded-lg flex justify-between items-center">
-                <div>
-                    <h3 class="text-lg font-semibold">{{ item.card_type.card_name }}</h3>
-                    <p class="text-gray-500">Price per unit: ${{ item.card_type.amount }}</p>
-                    <p class="text-gray-500">Quantity: {{ item.quantity }}</p>
-                </div>
-                <div class="text-right">
-                    <p class="text-xl font-bold">${{ item.total_cost }}</p>
+    <section class="bg-white">
+        <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+            <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 mb-8">Review Your Order</h2>
+            <div id="cart-items" class="grid grid-cols-1 gap-4">
+                {% for item in cart.get_items %}
+                    <div class="p-4 bg-gray-100 border rounded-lg flex justify-between items-center">
+                        <div>
+                            <h3 class="text-lg font-semibold">{{ item.card_type.card_name }}</h3>
+                            <p class="text-gray-500">Price per unit: ${{ item.card_type.amount }}</p>
+                            <p class="text-gray-500">Quantity: {{ item.quantity }}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xl font-bold">${{ item.total_cost }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="recipient" class="grid grid-cols-1 gap-4">&nbsp;</div>
+            {#  Show Gift Card Recipient, Recipient's e-mail, Recipient's address: #}
+            <div id="recipient" class="grid grid-cols-1 gap-4">
+                <div class="p-2 bg-gray-100 border rounded-lg flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-semibold">Gift Card Recipient:  {{ recipient.first_name }} {{ recipient.last_name }}</h3>
+                        <p class="text-gray-500">Recipient's e-mail address: {{ recipient.email }}</p>
+                        <p class="text-gray-500">Recipient's address:</p>
+                        <p class="text-gray-500">{{ recipient.address.street_address1 }}</p>
+                        <p class="text-gray-500">{{ recipient.address.street_address2 }}</p>
+                        <p class="text-gray-500">
+                            {{ recipient.address.city }}, {{ recipient.address.state }} {{ recipient.address.zip_code }}
+                        </p>
+                    </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-
-        <div id="recipient" class="grid grid-cols-1 gap-4">
-            &nbsp;
-        </div>
-
-        {#  Show Gift Card Recipient, Recipient's e-mail, Recipient's address: #}
-        <div id="recipient" class="grid grid-cols-1 gap-4">
-            <div class="p-2 bg-gray-100 border rounded-lg flex justify-between items-center">
-                <div>
-                    <h3 class="text-lg font-semibold">
-                        Gift Card Recipient:  {{ recipient.first_name }} {{ recipient.last_name }}
-                    </h3>
-                    <p class="text-gray-500">Recipient's e-mail address: {{ recipient.email }}</p>
-                    <p class="text-gray-500">Recipient's address:</p>
-                    <p class="text-gray-500">{{ recipient.address.street_address1 }}</p>
-                    <p class="text-gray-500">{{ recipient.address.street_address2 }}</p>
-                    <p class="text-gray-500">
-                        {{ recipient.address.city }}, {{ recipient.address.state }} {{ recipient.address.zip_code }}
-                    </p>
+            <div id="recipient" class="grid grid-cols-1 gap-4">&nbsp;</div>
+            {# Gift Giver, Last 4 digits of payment method: #}
+            <div id="giver" class="grid grid-cols-1 gap-4">
+                <div class="p-2 bg-gray-100 border rounded-lg flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-semibold">Gift Card Giver:  {{ card.card_holder_name }}</h3>
+                        <p class="text-gray-500">Card Number: ...{{ card.card_number }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div id="recipient" class="grid grid-cols-1 gap-4">
-            &nbsp;
-        </div>
-
-        {# Gift Giver, Last 4 digits of payment method: #}
-        <div id="giver" class="grid grid-cols-1 gap-4">
-            <div class="p-2 bg-gray-100 border rounded-lg flex justify-between items-center">
-                <div>
-                    <h3 class="text-lg font-semibold">
-                        Gift Card Giver:  {{ card.card_holder_name }}
-                    </h3>
-                    <p class="text-gray-500">Card Number: ...{{ card.card_number }}</p>
-                </div>
+            <div id="buttons" class="p-8 grid grid-cols-2 gap-4">
+                <form action="{% url 'review_order' %}" method="post" class="text-left">
+                    {% csrf_token %}
+                    <button type="submit"
+                            name="action"
+                            value="cancel"
+                            class="inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                        Cancel
+                    </button>
+                </form>
+                <form action="{% url 'review_order' %}" method="post" class="text-right">
+                    {% csrf_token %}
+                    <button type="submit"
+                            name="action"
+                            value="purchase"
+                            class="inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                        Complete Purchase
+                    </button>
+                </form>
             </div>
         </div>
-
-        <div id="buttons" class="p-8 grid grid-cols-2 gap-4">
-            <form action="{% url 'review_order' %}" method="post" class="text-left">
-                {% csrf_token %}
-                <button type="submit" name="action" value="cancel" class="inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-                    Cancel
-                </button>
-            </form>
-
-            <form action="{% url 'review_order' %}" method="post" class="text-right">
-                {% csrf_token %}
-                <button type="submit" name="action" value="purchase" class="inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
-                    Complete Purchase
-                </button>
-            </form>
-        </div>
-    </div>
-</section>
+    </section>
 {% endblock content %}

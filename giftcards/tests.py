@@ -10,36 +10,36 @@ class GiftCardTypeTests(TestCase):
     def setUpTestData(cls):
         User = get_user_model()
         cls.user = User.objects.create_user(
-            username = "phoenix",
-            email = "phoenix@example.local",
-            password = "TestPass1342!",
-            preferred_category = 6
+            username="phoenix",
+            email="phoenix@example.local",
+            password="TestPass1342!",
+            preferred_category=6,
         )
         cls.giftcard1 = GiftCardType.objects.create(
-            card_name = "Spotify Gift Card",
-            card_description = "A gift card to enjoy Spotify Premium.",
-            card_category = 6,
-            card_type = 1,
-            card_quantity = 50,
-            card_image_url = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/2800/2800086_sd.jpg;maxHeight=640;maxWidth=550;format=webp",
-            amount = "200.00",
-            cashback = "10.00",
-            vendor = "Spotify",
-            creation_date = "2024-01-05T12:00:00Z",
-            update_date = "2024-01-20T12:00:00Z",
+            card_name="Spotify Gift Card",
+            card_description="A gift card to enjoy Spotify Premium.",
+            card_category=6,
+            card_type=1,
+            card_quantity=50,
+            card_image_url="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/2800/2800086_sd.jpg;maxHeight=640;maxWidth=550;format=webp",
+            amount="200.00",
+            cashback="10.00",
+            vendor="Spotify",
+            creation_date="2024-01-05T12:00:00Z",
+            update_date="2024-01-20T12:00:00Z",
         )
         cls.giftcard2 = GiftCardType.objects.create(
-            card_name = "Best Buy Gift Card",
-            card_description = "A gift card for electronics and gadgets at Best Buy.",
-            card_category = 9,
-            card_type = 2,
-            card_quantity = 30,
-            card_image_url = "https://m.media-amazon.com/images/I/31rakPi6KsL._SY400_.jpg",
-            amount = "100.00",
-            cashback = "5.00",
-            vendor = "Best Buy",
-            creation_date = "2024-01-10T15:00:00Z",
-            update_date = "2024-01-25T15:00:00Z",
+            card_name="Best Buy Gift Card",
+            card_description="A gift card for electronics and gadgets at Best Buy.",
+            card_category=9,
+            card_type=2,
+            card_quantity=30,
+            card_image_url="https://m.media-amazon.com/images/I/31rakPi6KsL._SY400_.jpg",
+            amount="100.00",
+            cashback="5.00",
+            vendor="Best Buy",
+            creation_date="2024-01-10T15:00:00Z",
+            update_date="2024-01-25T15:00:00Z",
         )
 
     def test_giftcard_listing(self):

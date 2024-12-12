@@ -1,6 +1,4 @@
-from django.urls import path # type: ignore
+from django.urls import path  # type: ignore
 from . import views
 
-urlpatterns = [
-    path('', views.home, name='home')
-]
+urlpatterns = [path("", views.home, name="home")]

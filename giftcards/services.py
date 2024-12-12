@@ -1,6 +1,7 @@
 from .models import GiftCardType, BaseGiftCard
 from django.db.models import Q
 
+
 class GiftCardCatalog:
     def search_gift_card_type(self, name):
         return GiftCardType.objects.filter(card_name__icontains=name)
@@ -36,7 +37,7 @@ class SearchEngine:
             "price": "amount",
             "availability": "card_quantity",
             "vendor": "vendor",
-            "cashback": "cashback"
+            "cashback": "cashback",
         }
 
         match criteria:

@@ -1,54 +1,56 @@
 {% extends 'base.html' %}
-
 {% block title %}
-Home - Gift Genius
+    Home - Gift Genius
 {% endblock title %}
-
 {% block content %}
-<!-- Main Hero Section -->
-<section class="container mx-auto flex flex-col lg:flex-row items-center mt-16 lg:mt-32 px-6 space-y-12 lg:space-y-0">
-    <!-- Left Content -->
-    <div class="text-center lg:text-left lg:w-1/2 fade-in space-y-6">
-        <h1 class="text-5xl font-extrabold leading-tight fade-in text-black">The Future of Digital Gifting</h1>
-        <p class="mt-4 text-lg leading-relaxed fade-in text-gray-700">Fast, secure, and convenient. Explore our platform for the best digital gift card experience.</p>
-        <a href="{% url 'register' %}" class="mt-6 inline-block bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 fade-in"
-            style="animation-delay: 1s;">Get Started</a>
-    </div>
-
-    <!-- Right Content  -->
-    <div class="lg:w-1/2 text-center lg:text-right">
-        <img src="https://www.kindpng.com/picc/m/282-2822613_slide-trade-gift-card-hd-png-download.png" alt="Gift Illustration" class="mx-auto lg:ml-auto transform hover:scale-105 transition duration-300" style="animation-delay: 1s;">
-    </div>
-</section>
-
-<!-- What We Do Section -->
-<section class="container mx-auto mt-24 px-6 py-16 border-t border-gray-300">
-    <div class="text-center lg:text-left lg:w-3/4 mx-auto space-y-6 fade-in">
-        <h2 class="text-4xl font-bold fade-in mb-8">What We Do</h2>
-        <p class="mt-4 text-lg fade-in text-gray-700">
-            With access to a wide range of retailers and brands, our platform lets you customize digital gift cards for any occasion. Whether it’s a birthday, holiday, or just a token of appreciation, we empower you to gift thoughtfully, effortlessly.
-            With both digital and physical delivery options, sending joy has never been easier. Choose a card, personalize it, and let us handle the rest.
-            At E-Gift Commerce, we make the art of gifting seamless, fast, and personalized. No more wandering through endless aisles or guessing what someone might like.
-        </p>
-    </div>
-</section>
-
-<!-- Join Us Section -->
-<section class="container mx-auto mt-24 px-6 py-16 border-t border-gray-300">
-    <div class="flex flex-col lg:flex-row items-center lg:justify-between lg:text-left space-y-12 lg:space-y-0">
-        <div class="lg:w-1/2 fade-in space-y-6">
-            <h2 class="text-4xl font-bold fade-in mb-8">Join Us Today!</h2>
-            <p class="mt-4 text-lg fade-in text-gray-700">
-                Experience the next generation of gifting by joining E-Gift Commerce today. Enjoy exclusive offers, seamless transactions, and a secure platform that allows you to track every card you send.
+    <!-- Main Hero Section -->
+    <section class="container mx-auto flex flex-col lg:flex-row items-center mt-16 lg:mt-32 px-6 space-y-12 lg:space-y-0">
+        <!-- Left Content -->
+        <div class="text-center lg:text-left lg:w-1/2 fade-in space-y-6">
+            <h1 class="text-5xl font-extrabold leading-tight fade-in text-black">The Future of Digital Gifting</h1>
+            <p class="mt-4 text-lg leading-relaxed fade-in text-gray-700">
+                Fast, secure, and convenient. Explore our platform for the best digital gift card experience.
             </p>
+            <a href="{% url 'register' %}"
+               class="mt-6 inline-block bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 fade-in"
+               style="animation-delay: 1s">Get Started</a>
+        </div>
+        <!-- Right Content  -->
+        <div class="lg:w-1/2 text-center lg:text-right">
+            <img src="https://www.kindpng.com/picc/m/282-2822613_slide-trade-gift-card-hd-png-download.png"
+                 alt="Gift Illustration"
+                 class="mx-auto lg:ml-auto transform hover:scale-105 transition duration-300"
+                 style="animation-delay: 1s">
+        </div>
+    </section>
+    <!-- What We Do Section -->
+    <section class="container mx-auto mt-24 px-6 py-16 border-t border-gray-300">
+        <div class="text-center lg:text-left lg:w-3/4 mx-auto space-y-6 fade-in">
+            <h2 class="text-4xl font-bold fade-in mb-8">What We Do</h2>
             <p class="mt-4 text-lg fade-in text-gray-700">
-                From corporate gifts to personal celebrations, we offer a one-stop solution for all your gifting needs, whether you’re sending one gift or one hundred.
+                With access to a wide range of retailers and brands, our platform lets you customize digital gift cards for any occasion. Whether it’s a birthday, holiday, or just a token of appreciation, we empower you to gift thoughtfully, effortlessly.
+                With both digital and physical delivery options, sending joy has never been easier. Choose a card, personalize it, and let us handle the rest.
+                At E-Gift Commerce, we make the art of gifting seamless, fast, and personalized. No more wandering through endless aisles or guessing what someone might like.
             </p>
         </div>
-        <div class="lg:w-1/2 text-center lg:text-right mt-10 lg:mt-0">
-            <a href="{% url 'register' %}" class="inline-block bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 fade-in"
-                style="animation-delay: 1s;">Sign Up Now</a>
+    </section>
+    <!-- Join Us Section -->
+    <section class="container mx-auto mt-24 px-6 py-16 border-t border-gray-300">
+        <div class="flex flex-col lg:flex-row items-center lg:justify-between lg:text-left space-y-12 lg:space-y-0">
+            <div class="lg:w-1/2 fade-in space-y-6">
+                <h2 class="text-4xl font-bold fade-in mb-8">Join Us Today!</h2>
+                <p class="mt-4 text-lg fade-in text-gray-700">
+                    Experience the next generation of gifting by joining E-Gift Commerce today. Enjoy exclusive offers, seamless transactions, and a secure platform that allows you to track every card you send.
+                </p>
+                <p class="mt-4 text-lg fade-in text-gray-700">
+                    From corporate gifts to personal celebrations, we offer a one-stop solution for all your gifting needs, whether you’re sending one gift or one hundred.
+                </p>
+            </div>
+            <div class="lg:w-1/2 text-center lg:text-right mt-10 lg:mt-0">
+                <a href="{% url 'register' %}"
+                   class="inline-block bg-black text-white hover:bg-gray-800 px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 fade-in"
+                   style="animation-delay: 1s">Sign Up Now</a>
+            </div>
         </div>
-    </div>
-<registersection>
-{% endblock content %}
+        <registersection>
+    {% endblock content %}

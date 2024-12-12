@@ -10,80 +10,148 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('accounts', '0001_initial'),
-        ('giftcards', '0001_initial'),
+        ("accounts", "0001_initial"),
+        ("giftcards", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('order_id', models.AutoField(primary_key=True, serialize=False)),
-                ('order_date', models.DateTimeField(auto_now_add=True)),
-                ('order_status', models.IntegerField(choices=[(1, 'Pending'), (2, 'Processing'), (3, 'Shipped'), (4, 'Completed'), (5, 'Cancelled')], default=1)),
-                ('order_total', models.FloatField(default=0.0)),
-                ('recipient', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='recipient', to=settings.AUTH_USER_MODEL)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("order_id", models.AutoField(primary_key=True, serialize=False)),
+                ("order_date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "order_status",
+                    models.IntegerField(
+                        choices=[
+                            (1, "Pending"),
+                            (2, "Processing"),
+                            (3, "Shipped"),
+                            (4, "Completed"),
+                            (5, "Cancelled"),
+                        ],
+                        default=1,
+                    ),
+                ),
+                ("order_total", models.FloatField(default=0.0)),
+                (
+                    "recipient",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="recipient",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='OrderItem',
+            name="OrderItem",
             fields=[
-                ('item_id', models.AutoField(primary_key=True, serialize=False)),
-                ('quantity', models.IntegerField(default=1)),
-                ('card', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='giftcards.basegiftcard')),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.order')),
+                ("item_id", models.AutoField(primary_key=True, serialize=False)),
+                ("quantity", models.IntegerField(default=1)),
+                (
+                    "card",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="giftcards.basegiftcard"
+                    ),
+                ),
+                (
+                    "order",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="shop.order"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Payment',
+            name="Payment",
             fields=[
-                ('payment_id', models.AutoField(primary_key=True, serialize=False)),
-                ('amount', models.FloatField()),
-                ('status', models.CharField(blank=True, max_length=20)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("payment_id", models.AutoField(primary_key=True, serialize=False)),
+                ("amount", models.FloatField()),
+                ("status", models.CharField(blank=True, max_length=20)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='order',
-            name='payment',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='shop.payment'),
+            model_name="order",
+            name="payment",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="shop.payment"
+            ),
         ),
         migrations.CreateModel(
-            name='PaymentMethod',
+            name="PaymentMethod",
             fields=[
-                ('payment_method_id', models.AutoField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=50)),
-                ('description', models.TextField(blank=True)),
-                ('card_number', models.CharField(max_length=20)),
-                ('expiration_date', models.DateTimeField()),
-                ('cvv', models.CharField(max_length=4)),
-                ('card_holder_name', models.CharField(max_length=100)),
-                ('status', models.CharField(blank=True, max_length=20)),
-                ('card_holder_address', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='accounts.address')),
+                ("payment_method_id", models.AutoField(primary_key=True, serialize=False)),
+                ("name", models.CharField(max_length=50)),
+                ("description", models.TextField(blank=True)),
+                ("card_number", models.CharField(max_length=20)),
+                ("expiration_date", models.DateTimeField()),
+                ("cvv", models.CharField(max_length=4)),
+                ("card_holder_name", models.CharField(max_length=100)),
+                ("status", models.CharField(blank=True, max_length=20)),
+                (
+                    "card_holder_address",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE, to="accounts.address"
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='payment',
-            name='payment_method',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, to='shop.paymentmethod'),
+            model_name="payment",
+            name="payment_method",
+            field=models.OneToOneField(
+                null=True, on_delete=django.db.models.deletion.SET_NULL, to="shop.paymentmethod"
+            ),
         ),
         migrations.CreateModel(
-            name='ShoppingCart',
+            name="ShoppingCart",
             fields=[
-                ('cart_id', models.AutoField(primary_key=True, serialize=False)),
-                ('order_total', models.FloatField(default=0.0)),
-                ('user', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("cart_id", models.AutoField(primary_key=True, serialize=False)),
+                ("order_total", models.FloatField(default=0.0)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ShoppingCartItem',
+            name="ShoppingCartItem",
             fields=[
-                ('item_id', models.AutoField(primary_key=True, serialize=False)),
-                ('quantity', models.IntegerField(default=1)),
-                ('card_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='giftcards.giftcardtype')),
-                ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cart_items', to='shop.shoppingcart')),
+                ("item_id", models.AutoField(primary_key=True, serialize=False)),
+                ("quantity", models.IntegerField(default=1)),
+                (
+                    "card_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="giftcards.giftcardtype"
+                    ),
+                ),
+                (
+                    "cart",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="cart_items",
+                        to="shop.shoppingcart",
+                    ),
+                ),
             ],
         ),
     ]

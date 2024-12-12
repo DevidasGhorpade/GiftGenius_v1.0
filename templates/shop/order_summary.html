@@ -1,24 +1,27 @@
 {% extends "base.html" %}
-
 {% block title %}Order Summary{% endblock %}
-
 {% block content %}
-<section class="bg-white shadow rounded-lg p-8 max-w-4xl mx-auto mt-10">
-    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Order Summary</h2>
-
-        <div class="mb-6">
-            <p class="text-lg text-gray-700">Thank you for your purchase, <strong>{{ order.user.username }}</strong>!</p>
-            <p class="text-lg text-gray-700 mt-2">Your order ID is <strong>#{{ order.order_id }}</strong>.</p>
-            <p class="text-lg text-gray-700 mt-2">Recipient: <strong>{{ order.recipient.username }}</strong></p>
+    <section class="bg-white shadow rounded-lg p-8 max-w-4xl mx-auto mt-10">
+        <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Order Summary</h2>
+            <div class="mb-6">
+                <p class="text-lg text-gray-700">
+                    Thank you for your purchase, <strong>{{ order.user.username }}</strong>!
+                </p>
+                <p class="text-lg text-gray-700 mt-2">
+                    Your order ID is <strong>#{{ order.order_id }}</strong>.
+                </p>
+                <p class="text-lg text-gray-700 mt-2">
+                    Recipient: <strong>{{ order.recipient.username }}</strong>
+                </p>
+            </div>
+            <div class="mt-6 flex justify-between items-center">
+                <h3 class="text-xl font-semibold text-gray-900">Total: ${{ order.order_total|floatformat:2 }}</h3>
+                <a href="{% url 'giftcard_list' %}"
+                   class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                    Continue Shopping
+                </a>
+            </div>
         </div>
-
-        <div class="mt-6 flex justify-between items-center">
-            <h3 class="text-xl font-semibold text-gray-900">Total: ${{ order.order_total|floatformat:2 }}</h3>
-            <a href="{% url 'giftcard_list' %}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                Continue Shopping
-            </a>
-        </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

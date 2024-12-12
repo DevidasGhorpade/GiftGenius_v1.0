@@ -14,8 +14,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin # type: ignore
-from django.urls import path, include # type: ignore
+
+from django.contrib import admin  # type: ignore
+from django.urls import path, include  # type: ignore
 
 """
 Note django.contrib.auth.urls includes:
@@ -31,15 +32,13 @@ Note django.contrib.auth.urls includes:
 
 urlpatterns = [
     # Django admin:
-    path('admin/', admin.site.urls),
-
+    path("admin/", admin.site.urls),
     # User management:
-    path('accounts/', include('django.contrib.auth.urls')),
-
+    path("accounts/", include("django.contrib.auth.urls")),
     # Local apps - believe need to order from most to least specific:
-    path('accounts/', include('accounts.urls')),
-    path('faq/', include('faq.urls')),
-    path('giftcards/', include('giftcards.urls')),
-    path('shop/', include('shop.urls')),
-    path('', include('main.urls')),
+    path("accounts/", include("accounts.urls")),
+    path("faq/", include("faq.urls")),
+    path("giftcards/", include("giftcards.urls")),
+    path("shop/", include("shop.urls")),
+    path("", include("main.urls")),
 ]

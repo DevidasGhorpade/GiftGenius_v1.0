@@ -18,17 +18,11 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = [
-        'email',
-        'username',
-        'role',
-        'address',
-        'is_superuser'
-    ]
+    list_display = ["email", "username", "role", "address", "is_superuser"]
     # Can't use this - results in error:
     # fields =  ['username', 'email', 'role', 'address', 'shipping_address', 'password1', 'password2']
 
-    '''
+    """
     Attempt #1 - didn't work:
     fieldsets = UserAdmin.fieldsets + ((None, {'fields': ['role', 'shippingaddress']}),)
     add_fieldsets = UserAdmin.add_fieldsets + ((None, {'fields': ['role', 'shippingaddress']}),)
@@ -37,33 +31,49 @@ class CustomUserAdmin(UserAdmin):
     https://forum.djangoproject.com/t/fielderror-unknown-field-s-usable-password-specified-for-customuser/36560
     * Have to exclude 'usable_password' or get FieldError when adding user
     * that this is an unknown field:
-    '''
+    """
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': (
-            'first_name', 'last_name', 'email', 'preferred_category', 'role', 'address'
-            )}
+        (None, {"fields": ("username", "password")}),
+        (
+            _("Personal info"),
+            {
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "preferred_category",
+                    "role",
+                    "address",
+                )
+            },
         ),
         (
-            _('Permissions'),
+            _("Permissions"),
             {
-                'fields': (
-                    'is_active',
-                    'is_staff',
-                    'is_superuser',
-                    'groups',
-                    'user_permissions',
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "groups",
+                    "user_permissions",
                 ),
             },
         ),
-        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
     add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': (
-                'username', 'email', 'preferred_category', 'role', 'address',
-                'password1', 'password2'
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "username",
+                    "email",
+                    "preferred_category",
+                    "role",
+                    "address",
+                    "password1",
+                    "password2",
                 ),
             },
         ),

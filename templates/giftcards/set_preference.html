@@ -1,27 +1,27 @@
 {% extends "base.html" %}
-
-{% block title %} Set Preference {% endblock title %}
-
+{% block title %}
+    Set Preference
+{% endblock title %}
 {% block content %}
-<section class="bg-white">
-  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-    <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 mb-8">Select Your Preferred Category</h2>
-        <form method="post" action="{% url 'set_preferred_category' %}">
-            {% csrf_token %}
-            <label for="preferred_category" class="block text-sm font-medium text-gray-700">Preferred Category</label>
-            <select
-                id="preferred_category"
-                name="preferred_category"
-                class="mt-2 w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700">
-            {% for category_id, category_name in giftcard_categories %}
-            <option value="{{ category_id }}">{{ category_name }}</option>
-            {% endfor %}
-            </select>
-            <button type="submit"
-                    class="mt-6 w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition focus:outline-none">
-            Save Preference
-            </button>
-        </form>
-    </div>
-</section>
+    <section class="bg-white">
+        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+            <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 mb-8">Select Your Preferred Category</h2>
+            <form method="post" action="{% url 'set_preferred_category' %}">
+                {% csrf_token %}
+                <label for="preferred_category"
+                       class="block text-sm font-medium text-gray-700">Preferred Category</label>
+                <select id="preferred_category"
+                        name="preferred_category"
+                        class="mt-2 w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700">
+                    {% for category_id, category_name in giftcard_categories %}
+                        <option value="{{ category_id }}">{{ category_name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit"
+                        class="mt-6 w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition focus:outline-none">
+                    Save Preference
+                </button>
+            </form>
+        </div>
+    </section>
 {% endblock content %}

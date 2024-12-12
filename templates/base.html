@@ -1,73 +1,69 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Gift Genius{% endblock title %}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    <link href="{% static 'css/output.css' %}" rel="stylesheet">
-</head>
-
-<body>
-
-    <!-- Header -->
-    <header>
-        <div class="container mx-auto flex items-center justify-between">
-            <div class="text-xl font-bold">
-                <a href="/" class="text-white">Gift Genius</a>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}
+                Gift Genius
+            {% endblock title %}
+        </title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+        <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="container mx-auto flex items-center justify-between">
+                <div class="text-xl font-bold">
+                    <a href="/" class="text-white">Gift Genius</a>
+                </div>
+                <nav>
+                    {% if user and user.is_authenticated %}
+                        <a href="{% url 'giftcard_list' %}" class="nav-link">Gift Cards</a>
+                        <a href="{% url 'cart_summary' %}" class="nav-link">Shopping Cart</a>
+                        <a href="{% url 'display_faq' %}" class="nav-link">FAQ</a>
+                    {% endif %}
+                    {% if user and user.is_superuser %}
+                        <!-- URL form preferered but not sure what it is... -->
+                        <a href="/admin" class="nav-link">Admin</a>
+                    {% endif %}
+                </nav>
+                <nav>
+                    {% if user and user.is_authenticated %}
+                        <div class="columns-2">
+                            <!-- Better would be user.first_name if present otherwise user.username: -->
+                            {{ user.username }}
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Logout</button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="nav-link">Login</a>
+                        <a href="{% url 'register' %}" class="nav-link">Register</a>
+                        <a href="{% url 'display_faq' %}" class="nav-link">FAQ</a>
+                    {% endif %}
+                </nav>
             </div>
-            <nav>
-                {% if user and user.is_authenticated %}
-                    <a href="{% url 'giftcard_list' %}" class="nav-link">Gift Cards</a>
-                    <a href="{% url 'cart_summary' %}" class="nav-link">Shopping Cart</a>
-                    <a href="{% url 'display_faq' %}" class="nav-link">FAQ</a>
-                {% endif %}
-                {% if user and user.is_superuser %}
-                    <!-- URL form preferered but not sure what it is... -->
-                    <a href="/admin" class="nav-link">Admin</a>
-                {% endif %}
-            </nav>
-            <nav>
-                {% if user and user.is_authenticated %}
-                    <div class="columns-2">
-                        <!-- Better would be user.first_name if present otherwise user.username: -->
-                        {{ user.username }}
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">Logout</button>
-                        </form>
-                    </div>
-                {% else %}
-                    <a href="{% url 'login' %}" class="nav-link">Login</a>
-                    <a href="{% url 'register' %}" class="nav-link">Register</a>
-                    <a href="{% url 'display_faq' %}" class="nav-link">FAQ</a>
-                {% endif %}
-            </nav>
-        </div>
-    </header>
-
-    <!-- Main Content Area -->
-    <main class="container mx-auto">
-        {% block content %}
-        {% endblock content %}
-    </main>
-
-    <!-- Footer -->
-    {% if show_footer %}
-        <footer>
-            <div class="container mx-auto text-center text-gray-400">
-                &copy; 2024 E-Gift Commerce. All rights reserved.
-                <br>
-                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-            </div>
-        </footer>
-    {% endif %}
-
-</body>
-
+        </header>
+        <!-- Main Content Area -->
+        <main class="container mx-auto">
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <!-- Footer -->
+        {% if show_footer %}
+            <footer>
+                <div class="container mx-auto text-center text-gray-400">
+                    &copy; 2024 E-Gift Commerce. All rights reserved.
+                    <br>
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                </div>
+            </footer>
+        {% endif %}
+    </body>
 </html>
