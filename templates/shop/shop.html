@@ -12,8 +12,8 @@
         {% for item in cart.get_items %}
           <div class="p-4 bg-gray-100 border rounded-lg flex justify-between items-center">
             <div>
-              <h3 class="text-lg font-semibold">{{ item.card_type_id.card_name }}</h3>
-              <p class="text-gray-500">Price per unit: ${{ item.card_type_id.amount }}</p>
+              <h3 class="text-lg font-semibold">{{ item.card_type.card_name }}</h3>
+              <p class="text-gray-500">Price per unit: ${{ item.card_type.amount }}</p>
               <p class="text-gray-500">Quantity: {{ item.quantity }}</p>
             </div>
             <div class="text-right">
